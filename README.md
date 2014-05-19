@@ -8,11 +8,10 @@ Program Description
   In order for the program to work the following pre-condition must be met
 
      1)  The file name must be called rspv.txt
-     2)  The file must not be empty at least a minimum of one name must be in the file.
-     3)  The data in the file must be in the form of <name surname-response> separated by 
+     2)  The data in the file must be in the form of <name surname-response> separated by 
           a comma if there are more then one grouping of names.
 
-     4) The response must either be 'yes' or 'no' or 'not replied'
+     3) The response must either be 'yes' or 'no' or 'not replied'
 
 
   If none of these pre-condition are met the program will not start, but politely inform you 
