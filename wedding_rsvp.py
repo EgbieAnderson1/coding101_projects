@@ -10,7 +10,7 @@
   ==============>
   
 #  A simple program that takes a file called rspv.txt as input, if no file is found by that name 
-#  the program creates that file and ask the user to use that file as a means to directly inteface
+#  the program creates that file and asks the user to use that file as a means to directly inteface
 #  with the program.
 #.
 #  In order for the program to work the following pre-condition must be met
@@ -40,7 +40,7 @@
 #  To use the program ensure that the following files are in the same directory
 #           1)  create_data.py
 #           2)  error.py
-#           3) You can use your own text file as long as it is called rsvp.txt but providing
+#           3) You can use your own text file as long as it is called rsvp.txt, but providing
 #                the data is entered in the way specified in the pre-condition above everything should run smoothly
 #
 #           4) Once every thing mention in step 1-3 are in the current working directory run the wedding_rsvp.py file
@@ -61,8 +61,8 @@ def sort_into_dictionary(wedding_list, guest_list):
 
     Takes a grouping of strings and sorts them into
     a python dictionary object. A dictionary object is implemented
-    using a hash function. This makes look up most faster then
-    a list object.
+    using a hash function. This makes looking up objects extremely fast.
+    Much faster then using a list object.
     '''
     error = Error()
     wedding_list = wedding_list.split(",")
