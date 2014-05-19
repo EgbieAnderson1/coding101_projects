@@ -1,6 +1,6 @@
 ########################################################################################
 #
-# Saturday 17 April 16:00hrs 2014
+# Sunday 18 April 16:00hrs 2014
 # Updated on <date and time on hrs>
 # Created by Egbie Anderson
 #  Written using python 2.7
