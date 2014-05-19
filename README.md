@@ -12,6 +12,7 @@ Program Description
           a comma if there are more then one grouping of names.
 
      3) The response must either be 'yes' or 'no' or 'not replied'
+     4) At least one name in the rsvp.txt file
 
 
   If none of these pre-condition are met the program will not start, but politely inform you 
