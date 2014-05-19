@@ -144,7 +144,8 @@ class InputOuput(Error):
 ###################################################
 class RSVP(InputOuput):
     ''' A simple program that takes a file called rspv.txt as input and displays the
-       guests coming to a wedding. The class contains only private methods
+       guests coming to a wedding, not coming or not yet replied. 
+       The class contains only private methods.
     '''
 
     def __init__(self):
@@ -160,7 +161,7 @@ class RSVP(InputOuput):
     def flush(self):
         '''flush(void) -> return(void)
 
-        Flush out the contents of the dictionary object
+        Flushs out the contents of the dictionary object
         '''
         self._set_guest_list({})
 
@@ -203,7 +204,7 @@ class RSVP(InputOuput):
         
     def _get_guests_not_attending(self):
         '''list_of_guest_not_attending(void) -> return(list)
-        Returns the list of guests that have are not attending'''
+        Returns the list of guests that are not attending'''
 
         return self._lookup_guest_via_reply("no")
         
@@ -213,7 +214,6 @@ class RSVP(InputOuput):
 
         return self._lookup_guest_via_reply("not replied")
            
-    # private function not to be used outside the class
     def _lookup_guest_via_reply(self, confirmation):
         ''' _lookup_guest_via_reply(str)  -> return(list)
 
@@ -235,7 +235,7 @@ class RSVP(InputOuput):
         for guest in self.total_guests:
            self.names, self.replies = guest
 
-           # iterate thru the replies if it matches the confirmation add to guests list
+           # iterate thru the replies if it matches the confirmation add to name to guests list
            for reply in self.replies:
                if reply == confirmation:
                    self.guests.append(self.names)
@@ -245,8 +245,10 @@ class RSVP(InputOuput):
         
     def _get_replies(self, response, name):
         '''_get_replies(str, str) -> return(void)
-
-        Takes a name and a response and based on the response
+        
+        A helper function that adds additional help to
+        _is_particular_guest_attending method by taking a name
+        and a response and based on the response
         given prints out whether the person is attending the wedding.
 
         >>> _get_replies('no', 'Adam King')
@@ -272,6 +274,8 @@ class RSVP(InputOuput):
         the person is attending the wedding. If there are multiple occurrence
         of the same name meaning there are multiple guests that share same name,
         the program prints out each name and assign to them a unique ID number.
+        
+        Uses the helper function _get_replies.
 
         >>> _is_particular_guest_attending(Shannon, Morse)
         [*] Shannon Morse will be attending your weddding.
@@ -320,8 +324,8 @@ class RSVP(InputOuput):
 ############################################################################
 class Interface(RSVP):
     '''The interface class acts as a bridge between the various
-    classes and also allows the user of the program access
-    the menu interface
+    classes and also allows the user of the program access to
+    the menu interface function
     '''
     def __init__(self):
           RSVP.__init__(self)
@@ -338,8 +342,8 @@ class Interface(RSVP):
 
         Works similar to write_to_file method. The
         only difference is instead of writing single
-        lines to a file. The program can write a block
-        of strings to a file
+        lines to a file. The method can write a block
+        of strings to a file at once
         '''
       
         for names in file_list:
@@ -408,29 +412,29 @@ class Interface(RSVP):
 
     def _open_attendees_file(self):
         '''_open_attendees_file(void) -> return(void)
-        Opens the list of attendees attending the wedding
+        Opens the list of attendees attending the wedding file
         '''
         self._open_file(os.path.join(os.getcwd(), "confirmed_guests_attending.txt"))
 
     def _open_guests_not_coming_file(self):
         '''_open_guests_not_coming_file(void) -> return(void)
-        Returns the number of guests not attending.
+        Opens the guest not coming file.
         '''
         self._open_file(os.path.join(os.getcwd(), "guests_not_attending_wedding.txt"))
 
     def _open_not_replied_file(self):
         '''_open_not_replied_file(void) -> return(void)
-        Returns the number of guests that have not yet replied
+        Opens the guest not replied file
         '''
         self._open_file(os.path.join(os.getcwd(), "guests_not_yet_replied.txt"))
 
     def format_string(self, first_name, surname, response):
         '''format_string(str, str, str) -> return(str)
 
-        Takes three strings a name, surname and a response and catcenates
+        Takes three strings a name, surname and a response and concatenates
         them in the form of <,name surname-response>. The comma at the
-        beginning ensures that when appended to the rspv.txt file. It's separated with
-        a comma.
+        beginning ensures that when appended to the rspv.txt file the name infront
+        of it is separated with a comma.
 
         >>> format_string(shannon, morse, yes)
         ',Shannon Morse-yes'
@@ -476,7 +480,7 @@ class Interface(RSVP):
     def _add_guest(self):
         '''add_guest(void) -> return(void)
 
-        Enables the user of the program to enter a name of the wedding list
+        Enables the user of the program to add a name to the invitation list
 
         >>> add_guest()
         
