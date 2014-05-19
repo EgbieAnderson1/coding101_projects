@@ -2,7 +2,6 @@
 # 
 # Coding 101 /Rsvp -> Example for episode 17
 # Saturday 17 April 16:00hrs 2014
-# Updated on <date and time on hrs>
 # Created by Egbie Anderson
 # Written using python 2.7
 # Copy right <None>
@@ -96,7 +95,6 @@ def sort_into_dictionary(wedding_list, guest_list):
 ###################################################
 class InputOuput(Error):
     '''Responsible for creating , loading and writing to a file
-    
     '''
 
     def __init__(self):
@@ -145,7 +143,7 @@ class InputOuput(Error):
 ###################################################
 class RSVP(InputOuput):
     ''' A simple program that takes a file called rspv.txt as input and displays the
-       guests coming to a wedding. The program contains only private methods
+       guests coming to a wedding. The class contains only private methods
     '''
 
     def __init__(self):
@@ -320,7 +318,7 @@ class RSVP(InputOuput):
 # User interface class
 ###################################################
 class Interface(RSVP):
-    '''The interface class allows a bridge between the various
+    '''The interface class acts as a bridge between the various
     classes and also allows the user of the program access
     the menu interface
     '''
