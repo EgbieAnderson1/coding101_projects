@@ -1,5 +1,5 @@
 #########################################################
-# To be used with <name.py> program
+# To be used with <wedding_rsvp.py> program
 # Sunday 18 May 16:26:16 hrs
 # Creates the data within the files on the user hard drive
 #
