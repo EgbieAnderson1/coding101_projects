@@ -117,7 +117,7 @@ class InputOuput(Error):
         except IOError:
             
              self.loading_error()
-             print "[*] Please wait attempting to create an empty file in user current working directory.."
+             print "[*] Attempting to create an empty file in user current working directory.."
              self.create_file()
              print "[*] Use that file to input you data, Thank you!!!\n"
              raw_input("[*] Press enter to exit program")
