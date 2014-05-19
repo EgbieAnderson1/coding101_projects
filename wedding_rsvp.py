@@ -20,6 +20,7 @@
 #         a comma if there are more then one grouping of names.
 #
 #   3) The response must either be 'yes' or 'no' or 'not replied'
+#   4) A minimum of one name in the rspv.txt file
 #
 #
 #  If none of these pre-condition are met the program will not start, but instead inform you of
