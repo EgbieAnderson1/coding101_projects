@@ -494,7 +494,7 @@ class Interface(RSVP):
         while True:
             
             self.first_name = raw_input("[*] Enter the first name:  ")
-            self.surname = raw_input("[*] Enter the surname : ")
+            self.surname = raw_input("[*] Enter the surname      : ")
 
             # Ensure that names are not empty
             if not self.first_name and not self.surname:
