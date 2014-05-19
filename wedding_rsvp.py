@@ -119,8 +119,9 @@ class InputOuput(Error):
              self.loading_error()
              print "[*] Please wait attempting to create an empty file in user current working directory.."
              self.create_file()
-             print "[*] Use that file to input you data, Thank you!!!"
-             sys.exit("[*] Exiting program !!!")
+             print "[*] Use that file to input you data, Thank you!!!\n"
+             raw_input("[*] Press enter to exit program")
+             sys.exit(0)
              
         else:
              self.wedding_list = self.file.read()
