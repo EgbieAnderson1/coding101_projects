@@ -21,14 +21,16 @@ class Error(object):
     
     def data_error(self):
         '''data_error(void) -> return(void)
-
         Displays data error that occurs with the rsvp.txt file
         '''
+        print"\n[!] Error incorrect data format in file rsvp.txt\n\n"
+        print"[*] Incorrect formation in rsvp.txt file. Could not properly parse string"
+        print"[*] Format must be in the form of '<name name-response>'"
+        print"[*] Each grouping of names must then be followed with exactly one comma(,)"
+        print"[*] Fix file format file and try again."
         
-        print "\n[*] Incorrect formation in rsvp.txt file. Could not properly parse string"
-        print "[*] Format must be in the form of '<name name-response>'"
-        print "[*] Each grouping of names must then be followed with exactly one comma(,)"
-        sys.exit("[*] Fix file format file and try again")
+        raw_input("\n[*] Press Enter key to exit")
+        sys.exit(0)
 
     def loading_error(self):
         '''loading_error(void) -> return(void)
