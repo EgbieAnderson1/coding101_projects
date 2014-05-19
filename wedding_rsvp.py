@@ -12,7 +12,7 @@
 #  A simple program that takes a file called rspv.txt as input, if no file is found by that name 
 #  the program creates that file and asks the user to use that file as a means to directly inteface
 #  with the program.
-#.
+#
 #  In order for the program to work the following pre-condition must be met
 #
 #   1)  The file name must be called rspv.txt
