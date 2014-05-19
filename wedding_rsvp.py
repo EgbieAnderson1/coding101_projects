@@ -467,7 +467,7 @@ class Interface(RSVP):
      #   self.update() # run update to get any new information
         self.num_of_people_invited =  self._get_total_guests()
             
-        print '\n[*] The total number of people invited to the wedding is %d     :\n '%(self.num_of_people_invited)
+        print '\n[*] The total number of people invited to the wedding is :  %d \n '%(self.num_of_people_invited)
         print '[*] Out of %d people invited number of people not attending are   : %d' %(self.num_of_people_invited, len(self._get_guests_not_attending()))
         print '[*] Out of %d people invited number of people attending are       : %d' %(self.num_of_people_invited, len(self._get_guests_attending()))
         print '[*] Out of %d people invited number of people not yet replied are : %d\n' %(self.num_of_people_invited, len(self._get_guests_not_replied()))
