@@ -110,7 +110,7 @@ class InputOuput(Error):
         print "[*] Successful created new file"
         
     def _load(self, rsvp_file):
-        '''load(str) -> return(list)'''
+        '''load(str) -> return(void)'''
 
         try:
              self.file = open(rsvp_file, "r")
@@ -264,8 +264,10 @@ class RSVP(InputOuput):
             print"[*] %s will be attending the weddding." %(name)
         elif response == "no":
             print"[*] Sorry %s will not be attending the weddding." %(name)
-        else:
+        elif response == "not replied":
             print"[*] %s has 'Not Yet Replied to your invitation." %(name)
+        else:
+            print"[*] Print no guest found by that name"
         
     def _is_particular_guest_attending(self, name, surname):
         '''_is_particular_guest_attending(str, str) -> return(void)
