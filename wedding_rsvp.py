@@ -267,7 +267,7 @@ class RSVP(InputOuput):
         elif response == "not replied":
             print"[*] %s has 'Not Yet Replied to your invitation." %(name)
         else:
-            print"[*] Print no guest found by that name"
+            print"[*] There is no guest by the name of %s " %(name)
         
     def _is_particular_guest_attending(self, name, surname):
         '''_is_particular_guest_attending(str, str) -> return(void)
