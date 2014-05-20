@@ -46,7 +46,7 @@
 #           4) Once every thing mention in step 1-3 are in the current working directory run the wedding_rsvp.py file
 #
 # The user of the program can modified alter or change the program
-###################################################################################
+####################################################################################
 '''
 
 import os
