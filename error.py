@@ -45,7 +45,7 @@ class Error(object):
         sleep(0.06)
         print "[!] Could not successful find the file rsvp.txt"
         self.error_log("[!] {} : Could not find rspv.txt file in user local directory.".format(ctime())) # create an error log
-        print "[!] An error not has be created in your log file"
+        print "[!] An error log has be created in your current working directory"
         sleep(0.06)
 
     def error_log(self, error):
