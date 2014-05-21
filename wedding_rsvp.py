@@ -314,7 +314,7 @@ class RSVP(InputOuput):
 
         '''
         self.guests = self._search_by_name(name, surname) # search dictionary object by name
-        if not self.guest:
+        if not self.guests:
             print "[*] The name %s %s is not in your wedding invitation." %(name.title(), surname.title())
         else:
             self.name = self._format_name(name, surname)
