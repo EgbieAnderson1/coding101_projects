@@ -1,7 +1,9 @@
 '''#################################################################################
 # 
 # Coding 101 /Rsvp -> Example for episode 17
-# Saturday 17 April 16:00hrs 2014
+# Saturday 17 May 16:00hrs 2014
+# Updated on wed 21 May 01:25 hrs
+# Updated on <date and time on hrs>
 # Created by Egbie Anderson
 # Written using python 2.7
 # Copy right <None>
@@ -10,17 +12,17 @@
   ==============>
   
 #  A simple program that takes a file called rspv.txt as input, if no file is found by that name 
-#  the program creates that file and asks the user to use that file as a means to directly inteface
+#  the program creates that file and ask the user to use that file as a means to directly inteface
 #  with the program.
-#
+#.
 #  In order for the program to work the following pre-condition must be met
 #
 #   1)  The file name must be called rspv.txt
-#   2)  The data in the file must be in the form of <name surname-response> separated by 
+#   2)  The file must not be empty at least a minimum of one name must be in the file.
+#   3)  The data in the file must be in the form of <name surname-response> separated by 
 #         a comma if there are more then one grouping of names.
 #
-#   3) The response must either be 'yes' or 'no' or 'not replied'
-#   4) A minimum of one name in the rspv.txt file
+#   4) The response must either be 'yes' or 'no' or 'not replied'
 #
 #
 #  If none of these pre-condition are met the program will not start, but instead inform you of
@@ -40,13 +42,13 @@
 #  To use the program ensure that the following files are in the same directory
 #           1)  create_data.py
 #           2)  error.py
-#           3) You can use your own text file as long as it is called rsvp.txt, but providing
+#           3) You can use your own text file as long as it is called rsvp.txt but providing
 #                the data is entered in the way specified in the pre-condition above everything should run smoothly
 #
 #           4) Once every thing mention in step 1-3 are in the current working directory run the wedding_rsvp.py file
 #
 # The user of the program can modified alter or change the program
-####################################################################################
+###################################################################################
 '''
 
 import os
@@ -60,9 +62,9 @@ def sort_into_dictionary(wedding_list, guest_list):
     '''sort_into_dictionary(str, dictionary_object)
 
     Takes a grouping of strings and sorts them into
-    a python dictionary object. A dictionary object is implemented
-    using a hash function. This makes looking up objects extremely fast.
-    Much faster then using a list object.
+    a python dictionary object. A python dictionary object is implemented
+    using a hash function. This makes look up extremly faster. Much faster
+    then using a list object.
     '''
     error = Error()
     wedding_list = wedding_list.split(",")
@@ -117,10 +119,10 @@ class InputOuput(Error):
         except IOError:
             
              self.loading_error()
-             print "[*] Attempting to create an empty file in user current working directory.."
+             print "[*] Please wait attempting to create an empty file in user current working directory.."
              self.create_file()
-             print "[*] Use that file to input you data, Thank you!!!\n"
-             raw_input("[*] Press enter to exit program")
+             print "[*] Use that file to input you data, Thank you!!!"
+             raw_input("[*] Press any key to exit program !!!")
              sys.exit(0)
              
         else:
@@ -144,8 +146,7 @@ class InputOuput(Error):
 ###################################################
 class RSVP(InputOuput):
     ''' A simple program that takes a file called rspv.txt as input and displays the
-       guests coming to a wedding, not coming or not yet replied. 
-       The class contains only private methods.
+       guests coming to a wedding. The program contains only private methods
     '''
 
     def __init__(self):
@@ -161,7 +162,7 @@ class RSVP(InputOuput):
     def flush(self):
         '''flush(void) -> return(void)
 
-        Flushs out the contents of the dictionary object
+        Flush out the contents of the dictionary object
         '''
         self._set_guest_list({})
 
@@ -204,7 +205,7 @@ class RSVP(InputOuput):
         
     def _get_guests_not_attending(self):
         '''list_of_guest_not_attending(void) -> return(list)
-        Returns the list of guests that are not attending'''
+        Returns the list of guests that have are not attending'''
 
         return self._lookup_guest_via_reply("no")
         
@@ -214,6 +215,7 @@ class RSVP(InputOuput):
 
         return self._lookup_guest_via_reply("not replied")
            
+    # private function not to be used outside the class
     def _lookup_guest_via_reply(self, confirmation):
         ''' _lookup_guest_via_reply(str)  -> return(list)
 
@@ -235,21 +237,33 @@ class RSVP(InputOuput):
         for guest in self.total_guests:
            self.names, self.replies = guest
 
-           # iterate thru the replies if it matches the confirmation add to name to guests list
+           # iterate thru the replies if it matches the confirmation add to guests list
            for reply in self.replies:
                if reply == confirmation:
                    self.guests.append(self.names)
                                 
         self.guests.sort()
         return self.guests
+
+    def _search_by_name(self, name, surname):
+        '''_search_for_guest(str, str) -> return(value)
+
+        Searches the dictionary object for guest based on their name
+        '''
+        # look up guests using their names 
+        try:
+            self.guest = self.guest_List["%s %s"%(name.title(), surname.title())]
+        except KeyError:
+            return False
+        return self.guest
         
     def _get_replies(self, response, name):
         '''_get_replies(str, str) -> return(void)
-        
-        A helper function that adds additional help to
-        _is_particular_guest_attending method by taking a name
-        and a response and based on the response
-        given prints out whether the person is attending the wedding.
+
+        A helper function that adds additional help to the
+        _is_particular_guest_attending method by taking 
+        a name and a response and based on the response
+        received prints out whether the person is attending the wedding.
 
         >>> _get_replies('no', 'Adam King')
         [*] Sorry Adam King will not be attending your weddding.
@@ -267,8 +281,8 @@ class RSVP(InputOuput):
         elif response == "not replied":
             print"[*] %s has 'Not Yet Replied to your invitation." %(name)
         else:
-            print"[*] A invalid reply was given by guest %s " %(name)
-        
+            print "[!] Received an invalid response from guest %s" %(name)
+            
     def _is_particular_guest_attending(self, name, surname):
         '''_is_particular_guest_attending(str, str) -> return(void)
 
@@ -276,8 +290,10 @@ class RSVP(InputOuput):
         the person is attending the wedding. If there are multiple occurrence
         of the same name meaning there are multiple guests that share same name,
         the program prints out each name and assign to them a unique ID number.
-        
-        Uses the helper function _get_replies.
+
+        Use two methods the first it searchs for the user by name
+        and second it uses the helper function _get_replies to display
+        their responses.
 
         >>> _is_particular_guest_attending(Shannon, Morse)
         [*] Shannon Morse will be attending your weddding.
@@ -296,38 +312,45 @@ class RSVP(InputOuput):
         [*] Egbie Anderson    ID No #: 3 will be attending the weddding.
 
         '''
-        # look up guests retreive their replies 
-        try:
-            self.response = self.guest_List["%s %s"%(name.title(), surname.title())]
-        except KeyError:
+        self.guests = self._search_by_name(name, surname) # search dictionary object by name
+        if not self.guest:
             print "[*] The name %s %s is not in your wedding invitation." %(name.title(), surname.title())
         else:
-        
-            self.name = name.title() + " " + surname.title()
-            self.guests_with_same_name = len(self.response) # no of guest with same name
+            self.name = self._format_name(name, surname)
+            self.guests_with_same_name = len(self.guests)    # number of guest with the same name
+            self.guest.sort() 
 
-            self.response.sort() 
-
-            # if there is one guest with that name get their reply.
+            # if there is only one guest with that name get their reply.
             if self.guests_with_same_name == 1:
-                self._get_replies(self.response[0], self.name)
+                self._get_replies(self.guest[0], self.name)
                 
             else:
                 print "\n[*] There are %d guests by the name of %s on the invitation list.\n" %(self.guests_with_same_name, self.name)
 
                 # since there are more then one guest that share the same name
-                # iterate thru the list of responsible and display each guest along with their reply
-                for i in range(len(self.response)):
-                   self._get_replies(self.response[i], self.name + "    ID No #: " + str(i + 1))
+                # iterate thru the list of guest and display each guest along with their reply
+                for i in range(len(self.guest)):
+                   self._get_replies(self.guest[i], self.name + "    ID No #: " + str(i + 1))
+
+    def _format_name(self, first_name, surname):
+        '''format_name(str, str) -> return(str)
+
+        Takes two strings a first name and second name and concatenates
+        them into one string separated by a space.
+
+        >>> format_name(Shannon, Morse)
+        Shannon Morse
+        '''
+        return first_name.title() + " " + surname.title()
 
             
-############################################################################
+###################################################
 # User interface class
-############################################################################
+###################################################
 class Interface(RSVP):
-    '''The interface class acts as a bridge between the various
-    classes and also allows the user of the program access to
-    the menu interface function
+    '''The interface class allows a bridge between the various
+    classes and also allows the user of the program access
+    the menu interface
     '''
     def __init__(self):
           RSVP.__init__(self)
@@ -344,8 +367,8 @@ class Interface(RSVP):
 
         Works similar to write_to_file method. The
         only difference is instead of writing single
-        lines to a file. The method can write a block
-        of strings to a file at once
+        lines to a file. The program can write a block
+        of strings to a file
         '''
       
         for names in file_list:
@@ -390,7 +413,7 @@ class Interface(RSVP):
             try:
                 self.choice = int(raw_input("\n[*] Selection your option : "))
             except ValueError:
-                print"[*] Choice must be 1-8"
+                print"[*] Choice must be 1-9"
             else:
                 return self.choice
             
@@ -400,10 +423,9 @@ class Interface(RSVP):
         Looks up a guest on the invitation list and displays if there are attending
         the wedding.
         '''
-        print "\n[*] Enter a name in order to lookup whether a guest is attending.\n"
-        
-        self.first_name = raw_input("[*] Enter the firstname : ")
-        self.surname = raw_input("[*] Enter the surname : ")
+        print "\n[*] Enter a name in order to perform a lookup on whether a guest is attending.\n"
+
+        self.first_name, self.surname = self._get_guest_name()
         self._is_particular_guest_attending(self.first_name, self.surname)
 
     def _open_wedding_invitation_file(self):
@@ -414,35 +436,50 @@ class Interface(RSVP):
 
     def _open_attendees_file(self):
         '''_open_attendees_file(void) -> return(void)
-        Opens the list of attendees attending the wedding file
+        Opens the list of attendees attending the wedding
         '''
         self._open_file(os.path.join(os.getcwd(), "confirmed_guests_attending.txt"))
 
     def _open_guests_not_coming_file(self):
         '''_open_guests_not_coming_file(void) -> return(void)
-        Opens the guest not coming file.
+        Returns the number of guests not attending.
         '''
         self._open_file(os.path.join(os.getcwd(), "guests_not_attending_wedding.txt"))
 
     def _open_not_replied_file(self):
         '''_open_not_replied_file(void) -> return(void)
-        Opens the guest not replied file
+        Returns the number of guests that have not yet replied
         '''
         self._open_file(os.path.join(os.getcwd(), "guests_not_yet_replied.txt"))
-
-    def format_string(self, first_name, surname, response):
+        
+    def _format_string(self, first_name, surname, response):
         '''format_string(str, str, str) -> return(str)
 
         Takes three strings a name, surname and a response and concatenates
         them in the form of <,name surname-response>. The comma at the
-        beginning ensures that when appended to the rspv.txt file the name infront
-        of it is separated with a comma.
+        beginning ensures that when appended to the rspv.txt file. It's separated with
+        a comma.
 
         >>> format_string(shannon, morse, yes)
         ',Shannon Morse-yes'
         '''
         return ("," + first_name.title().lstrip() + " " + surname.title() + "-" + response.strip())
 
+    def _get_guest_name(self):
+        '''get_guest_information(void) -> return(tuple)
+        Asks the user to enter their name and surname and returns
+        a tuple containg their name
+
+        >>> _get_guest_name()
+        [*] Enter the first name of the guest : Father
+        [*] Enter the surname of the guest : Padre
+        >>> Father Padre
+        
+        '''
+        self.first_name = raw_input("[*] Enter the first name of the guest : ")
+        self.surname = raw_input("[*] Enter the surname of the guest : ")
+        return self.first_name.title(), self.surname.title()
+    
     def update(self):
         """update(void) -> return(None)
 
@@ -471,18 +508,17 @@ class Interface(RSVP):
         >>> _get_total_people_invited()
         [*] The total number of people invited to the wedding is : 4
         '''
-     #   self.update() # run update to get any new information
         self.num_of_people_invited =  self._get_total_guests()
             
-        print '\n[*] The total number of people invited to the wedding is :  %d \n '%(self.num_of_people_invited)
-        print '[*] Out of %d people invited number of people not attending are   : %d' %(self.num_of_people_invited, len(self._get_guests_not_attending()))
-        print '[*] Out of %d people invited number of people attending are       : %d' %(self.num_of_people_invited, len(self._get_guests_attending()))
+        print '\n[*] The total number of people invited to the wedding is %d :\n '%(self.num_of_people_invited)
+        print '[*] Out of %d people invited number of people not attending are : %d' %(self.num_of_people_invited, len(self._get_guests_not_attending()))
+        print '[*] Out of %d people invited number of people attending are : %d' %(self.num_of_people_invited, len(self._get_guests_attending()))
         print '[*] Out of %d people invited number of people not yet replied are : %d\n' %(self.num_of_people_invited, len(self._get_guests_not_replied()))
-        
+            
     def _add_guest(self):
         '''add_guest(void) -> return(void)
 
-        Enables the user of the program to add a name to the invitation list
+        Enables the user of the program to enter a name of the wedding list
 
         >>> add_guest()
         
@@ -500,9 +536,8 @@ class Interface(RSVP):
         # First while loop ensures that first name is never empty
         while True:
             
-            self.first_name = raw_input("[*] Enter the first name:  ")
-            self.surname = raw_input("[*] Enter the surname      : ")
-
+            self.first_name, self.surname = self._get_guest_name()
+            
             # Ensure that names are not empty
             if not self.first_name and not self.surname:
                 continue
@@ -514,13 +549,13 @@ class Interface(RSVP):
         # second for loop ensures that confirmation is either yes, no or not replied
         while True:
             self.confirmation = raw_input("[*] Enter confirmation as either 'yes', 'no' or 'not replied' : ")
-            self.name = self.first_name.title() + " " + self.surname.title()
+            self.name = self._format_name(self.first_name, self.surname)
 
             # check whether the response matchs specification if not ask for response again
             if self.confirmation.lower() not in self.possible_responses:
                 continue
               
-            self.formatted_string = self.format_string(self.first_name, self.surname, self.confirmation.lower())
+            self.formatted_string = self._format_string(self.first_name, self.surname, self.confirmation.lower())
             break
 
         self._write_to_file("rsvp.txt", data=self.formatted_string)
@@ -553,7 +588,7 @@ def main():
              user_interface. _open_not_replied_file()
 
         elif choice == 5:
-             print '[*] Looking up guests ...'
+             print '[*] Perfom lookup on guests ...'
              user_interface._look_up_guest()
 
         elif choice == 6:
@@ -563,10 +598,12 @@ def main():
              user_interface._get_total_people_invited()
 
         elif choice == 8:
-            sys.exit("Exiting program, Goodnight Sweet Prince !!!")
-
+            print"[*] Exiting program, Goodnight Sweet Bride !!!"
+            sleep(4)
+            sys.exit(0)
+    
         else:
-            print '[*] choice must be between 1-7'
+            print '[*] choice must be between 1-8'
             continue
         
         raw_input("\n[*] Press enter to continue")
