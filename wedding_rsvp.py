@@ -291,8 +291,9 @@ class RSVP(InputOuput):
         of the same name meaning there are multiple guests that share same name,
         the program prints out each name and assign to them a unique ID number.
 
-        Use two methods the first it searchs for the user by name
-        and second it uses the helper function _get_replies to display
+        Use two methods the first it searches for the user by name
+        using a method called search_by_name and secondly it uses 
+        the helper function _get_replies to display
         their responses.
 
         >>> _is_particular_guest_attending(Shannon, Morse)
