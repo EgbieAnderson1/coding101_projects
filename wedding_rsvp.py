@@ -63,8 +63,8 @@ def sort_into_dictionary(wedding_list, guest_list):
 
     Takes a grouping of strings and sorts them into
     a python dictionary object. A python dictionary object is implemented
-    using a hash function. This makes look up extremly faster. Much faster
-    then using a list object.
+    using a hash function. This makes anything involving look up extremly 
+    fast. Much faster then using a list object.
     '''
     error = Error()
     wedding_list = wedding_list.split(",")
