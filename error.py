@@ -8,7 +8,7 @@
 #  Copy right <None>
 #
 # Program Description
-#  =================
+#  ==================
 #
 # Does nothing by itself to be used with rsvp class in order to detect errors
 #
